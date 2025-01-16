@@ -18,14 +18,19 @@
     <div class="wrapper">
         {{ partial "bio" . }}
         <main aria-label="Content">
+            <div style="display: flex; justify-content: center;">
+                <img src="/images/je-me-souviens.png" alt="je me souviens"
+                    style="max-width: 50%; height: auto; border-radius: 50%; border: 0px;">
+            </div>
+
             <h3 class="posts-item-note" aria-label="Recent Posts">{{ T "home.recent_posts" }}</h3>
             {{/* Show last 5 posts in reverse date order */}}
             {{ $pagesToShow := where .Site.RegularPages "Type" "in" site.Params.mainSections }}
             {{ $posts := $pagesToShow.ByDate.Reverse }}
-            {{ range first 5 $posts }}
+            {{ range first 7 $posts }}
             {{ partial "postCard" . }}
             {{ end }}
-            {{ if gt (len $posts) 5 }}
+            {{ if gt (len $posts) 10 }}
             <p>
                 {{ range $firstSection := (where .Site.Sections "Section" "in" (first 1 (.Site.Params.mainSections))) }}
                 <a href="{{ $firstSection.Permalink }}">{{ T "home.see_all_posts" }}</a>
